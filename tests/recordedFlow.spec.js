@@ -1,0 +1,38 @@
+import { test, expect } from '@playwright/test';
+
+test('test', async ({ page }) => {
+  await page.goto('https://parabank.parasoft.com/parabank/index.htm;jsessionid=54BC458C55E9AB183870E6DB899343E5');
+  await page.getByRole('link', { name: 'Register' }).click();
+  await page.locator('[id="customer.firstName"]').click();
+  await page.locator('[id="customer.firstName"]').fill('Monisha');
+  await page.locator('[id="customer.firstName"]').press('Tab');
+  await page.locator('[id="customer.lastName"]').click();
+  await page.locator('[id="customer.lastName"]').fill('Radja');
+  await page.locator('[id="customer.address.street"]').click();
+  await page.locator('[id="customer.address.street"]').fill('xyz');
+  await page.locator('[id="customer.address.street"]').press('Tab');
+  await page.locator('[id="customer.address.city"]').click();
+  await page.locator('[id="customer.address.city"]').fill('xxx');
+  await page.locator('[id="customer.address.city"]').press('Tab');
+  await page.locator('[id="customer.address.state"]').fill('yyy');
+  await page.locator('[id="customer.address.state"]').press('Tab');
+  await page.locator('[id="customer.address.zipCode"]').fill('12345');
+  await page.locator('[id="customer.phoneNumber"]').click();
+  await page.locator('[id="customer.phoneNumber"]').fill('1234567890');
+  await page.locator('[id="customer.ssn"]').click();
+  await page.locator('[id="customer.ssn"]').fill('34567');
+  await page.locator('[id="customer.username"]').click();
+  await page.locator('[id="customer.username"]').fill('Monisha');
+  await page.locator('tr:nth-child(11) > td:nth-child(2)').click();
+  await page.locator('[id="customer.password"]').fill('Moni@1997');
+  await page.locator('[id="customer.password"]').press('Tab');
+  await page.locator('#repeatedPassword').fill('Moni@1997');
+  await page.getByRole('button', { name: 'Register' }).click();
+  await page.locator('[id="customer.username"]').click();
+  await page.locator('[id="customer.username"]').fill('MonishaRadja');
+  await page.locator('[id="customer.password"]').click();
+  await page.locator('[id="customer.password"]').fill('0987');
+  await page.locator('tr:nth-child(12) > td:nth-child(2)').click();
+  await page.locator('#repeatedPassword').fill('0987');
+  await page.getByRole('button', { name: 'Register' }).click();
+});
