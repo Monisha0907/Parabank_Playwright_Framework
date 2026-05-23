@@ -14,8 +14,8 @@ test.only('Register', async ({ page }) => {
     await registerPage.registerDetails(username, password);
     console.log(username);
     console.log(password);
-    await accountsPage.openAccount();
-    console.log("Account Type:" +await accountsPage.accountTypeText.textContent());
-    console.log("Account Balance:" +await accountsPage.accountBalance.textContent());
-    console.log("Available Balance:" +await accountsPage.accountAvailableBalance.textContent());
+    const accountDetails = await accountsPage.openAccount();
+    console.log("Account Type:" + accountDetails.accountType);
+    console.log("Account Balance:" + accountDetails.balance);
+    console.log("Available Balance:" + accountDetails.availableBalance);
 });

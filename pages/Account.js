@@ -1,3 +1,5 @@
+import { expect } from '@playwright/test';
+
 class Account {
     constructor(page) {
         this.page = page;
@@ -24,22 +26,22 @@ async openAccount()
     await this.fromAccount.locator('option').first().waitFor({ state: 'attached' });
     await this.fromAccount.selectOption({ index: 0 });
     await this.openNewAccountButton.click();
-    await this.newAccountNumber.waitFor();
+    await this.newAccountNumber.click();
     await this.accountDetailsLink.click();    
-    await this.accountID.waitFor();
-    await this.page.waitForFunction(() => {
-      const accountType = document.querySelector('#accountType')?.textContent?.trim();
-      const balance = document.querySelector('#balance')?.textContent?.trim();
-      const availableBalance = document.querySelector('#availableBalance')?.textContent?.trim();
+        await expect(this.accountTypeText)
+            .not.toHaveText('');
 
-      return accountType && balance && availableBalance;
-    });
+        await expect(this.accountBalance)
+            .not.toHaveText('');
 
-    return {
-      accountType: (await this.accountTypeText.innerText()).trim(),
-      balance: (await this.accountBalance.innerText()).trim(),
-      availableBalance: (await this.accountAvailableBalance.innerText()).trim(),
-    };
+        await expect(this.accountAvailableBalance)
+            .not.toHaveText('');
+
+        return {
+            accountType: (await this.accountTypeText.innerText()).trim(),
+            balance: (await this.accountBalance.innerText()).trim(),
+            availableBalance: (await this.accountAvailableBalance.innerText()).trim()
+        };
   }
 
 }
